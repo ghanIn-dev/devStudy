@@ -203,3 +203,142 @@ UML은 개발을 할 때 사용하는 설계 도구이다.
 
 -실행시 형변환 관련 예외가 발생하지 않도록 하려면 "instanceof"예약어를 사용하여 검증 작업을 해야만 한다.
  instanceof의 좌측에는 확인하고자 하는 변수를, 우측에는 클래스 이름이 위치한다.
+ 
+ 
+ 
+ 
+ 
+##모든 클래스의 부모 java.lang.Object
+
+object 클래스의 메소드에서 가장 많이 사용하는 toString()메소드 와 equals() 
+
+**toString()** 메소드는 다음의 경우 호출됨
+
+-syso 메소드에 매개 변수로 들어가는 경우
+-더하기 연산을 하는 경우
+
+
+toString()함수는 오버라이딩을 통해 클래스의 값을 확인할 때 사용
+
+Ex)
+
+	public String toString(){
+
+		return "Name"=+name;
+
+	}	
+	
+	
+**equals()** 메소드 또한 오버라이딩을 해서 사용해야하며 객체의 값을 비교할 때 사용한다
+
+-오버라이딩을 하지 않고 사용하면 hashcode를 비교 즉, 주소값을 비교한다.
+
+
+
+##인터페이스 와  abstract
+
+
+사용이유
+
+- 설계시 선언해 두면 개발할 때 기능을 구현하는 데에만 집중할 수 있다.
+- 개발자의 역량에 따른 메소드의 이름과 매겨 변수 선언의 격차를 줄일 수 있다.
+- 공통적인 인터페이스와 abstract 클래스를 선언해 놓으면, 선언과 구현을 구분할 수 있다.
+
+**인터페이스**
+
+- public interface 이름       식으로 선언하며 메소드는 바디가 있으면 안된다.
+- 인터페이스를 구현하기 위한 예약어는 implements
+- 인터페이스를 구현할 경우 구현한 클래스에 메소드의 몸통을 반드시 만들어주어야한다.
+
+
+**abstract 클래스**
+- public abstract class name 형식으로 선언
+- abstract으로 선언한 메소드가 반드시 하나 이상 있어야함
+- 바디가 있는 메소드가 있어도 상관없음
+
+
+abstract의 탄생이유는 인터페이스외에 미리 만들어 놓아도 전혀 문제가 없는 경우 공통적인 기능을 미리 구현해 놓는 경우 abstract를 사용한다
+
+
+
+##Final
+
+
+- 클래스에 final을 선언하면 상속이 불가하다. 예로 String 클래스의 경우 더 이상 확장해서도 안되고 변경해서도 안되기 때문에 final로 선언되어있다.
+
+- 메소드의 final을 선언하면 오버라이딩이 불가하다. 
+- 변수의 final을 선언하면 "더 이상 바꿀 수 없다." 따라서 변수 생성과 동시에 초기화를 해야한다. 달 혹은 날짜 수 등 변하지 않는 값들에 대한 정의를 할 때 유용하다.
+
+
+##enum
+
+- enum 클래스의 변수를 지정할 경우 타입과 값을 지정할 필요가 없다.
+- 값을 지정할때는  ONE(1), 다음과 같은 형태로 한다.
+- enum 클래스의 부모는 무조건 java.lang.Enum이어야 한다 따라서 다른 클래스를 상속하면 안된다.
+- enum 클래스는 package-private 와 private접근 제어자로만 생성자를 사용할 수 있다.
+- compareTo() 메소드를 가장 많이 사용하며 (value1.compareTo(value2)형태) enum이 선언된 순서대로 각 상수들의 순서가 정해지는 이 순서를 비교하는 메소드이다. 같을 경우 0 앞에있으면 -위치 수 뒤에있으면 +위치 수 를 리턴한다.
+- values() 메소드는 enum클래스에 선언된 상수의 목록을 배열로 리턴한다.
+
+
+
+
+
+
+
+##Nested Class
+
+Nested class를 만드는 이유
+- 한 곳에서만 사용되는 클래스를 논리적으로 묶어서 처리할 필요가 있을 때
+- 캡슐화가 하고 싶을 때 (a라는 클래스에 private 변수가 있다 이때 이 변수에 접근하고 싶은 b라는 클래스를 선언하고 이 클래스를 외부에 노출시키고 싶지 않은 경우)
+- 소스의 가독성과 유지보수를 위해
+
+**static nested class**
+
+	- 클래스를 묶기 위해서 사용
+	 
+	 예) School 과 University 클래스가 있을 때 Student 클래스를 만들면 어느 클래스의 학생인지 불분		명하다 이때 School 클래스내에 static nested형식으로 학생클래스를 만들면 용도가 분명해지며 다른 		클래스에서 사용또한 불가하다. 
+	 
+	
+	선언 방식
+	public class OutClass{
+		static class StaticNested{
+		}
+	}
+	
+	객체 생성
+	OutClass.StaticNested staticnestedobj = new OutClass.StaticNested();
+	
+
+
+**Inner class & Anonymous class**
+
+	-캡슐화를 위해 사용 = 하나의 클래스에서 어떤 공통적인 작업을 수행하는 클래스가 필요한데, 다른 클래스에서는 그 클래스가 전혀 필요가 없을 때 => GUI관련 프로그램을 개발할 때 가장 많이 사용
+
+	선언방식
+	
+	public class OutClass{
+		class InnerClass{
+		}
+	}
+	
+	객체 생성
+	OutClass out = new Outclass();
+	InnerClass inner = out.new InnerClass();
+	
+	
+	익명클래스
+	-클래스의 양을 줄여 메모리를 줄이고 코드의 가독성을 높이기 위해 사용한다
+	
+
+
+ Nested 클래스를 컴파일하면 "감싼클래스$Nested클래스.class"가 생성된다.
+
+
+	
+	
+
+
+
+ 
+ 
+ 
