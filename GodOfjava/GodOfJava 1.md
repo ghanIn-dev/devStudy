@@ -334,6 +334,69 @@ Nested class를 만드는 이유
  Nested 클래스를 컴파일하면 "감싼클래스$Nested클래스.class"가 생성된다.
 
 
+
+##예외처리
+
+- try-catch에서 예외가 발생하지않으면 try내에 있는 문장 실행 후 try-catch 밖의 문장 실행
+- try-catch에서 예외가 발생할 경우 발생한 try내의 문장 이전까지 실행 후 catch문으로내에 문장 반드시 실행 후 이후 내용 실행
+- finally문은 반드시 실행
+
+
+### 다수의 예외처리
+- catch문은 한개 이상이 올수 있다.
+- 먼저 선언한 catch 블록의 예외 클래스가 다음에 선언한 catch블록의 부모에 속하면, 자식에 속하는 catch블록은 절대 실행될 일이 없으므로 컴파일 되지 않는다.
+- try블록에서 예외가 발생하면 예외와 관련있는 catch블록을 찾느다 따라서 관련된 블록이 없을 경우 쓰레드가 종료되기 때문에 마지막에는  catch(Exception e) 문으로 묶어주는 것이 바람직하다.
+
+
+### 예외의 종류
+
+- error : 자바 프로그램 밖에서 일어난 에러 (서버 메인보드 등의 문제) 에러는 프로세서에 영향을 주고 예외는 쓰레드에만 영향을 준다
+
+- checked exception :
+
+- unchecked exception (runtime exception) : 실행할때 나타나지 않는 예외로 컴파일시에 체크를 하지 않기 때문에 unchecked exception 이라고 한다 (예로 널포인트예외)
+
+
+###Throwable 클래스
+
+- exception과  error의 공통부모 클래스는 Throwable 클래스이다.
+
+ 자주 사용되는 메소드
+ - getMessage() : 예외를 메세지 형태로 제공
+ - toString() :  getMessage보다 조금 더 자세하게 제공
+ - printStackTrace() : 예외메세지와 발생한 메소드들의 호출 관계를 출력
+ 
+ 
+#예외를 던지는 throw와 나만의 예외처리 다시 공부
+ 
+ 
+ 
+##어노테이션
+
+- 컴파일러에게 정보를 알려주거나
+- 컴파일할 때와 설치시의 작업을 지정하거나
+- 실행할 때 별도의 처리가 필요할 때
+
+  
+ 
+ 
+ - @Override : 부모 클래스의 메소드를 override 했다는 것을 명시적으로 선언함 // "이 메소드는 override 된 거니 잘못 코딩했을시 컴파일러가 알려줘"라는 의미
+ 
+ - @Deprecated : 만들어져 있는 클래스나 메소드를 더 이상 사용하지 않겠다는 것을 컴파일러에게 전달
+ - @SuppressWarnings : 컴파일러에게 일부러 한것이니 경고할 필요 없다는 것을 알림
+ 
+ **메타 어노테이션**
+ 
+- @Target
+- @Retention
+- @Documented
+- @Inherited 
+
+
+
+
+
+
 	
 	
 
