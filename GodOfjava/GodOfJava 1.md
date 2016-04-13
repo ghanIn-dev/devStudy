@@ -416,6 +416,96 @@ Nested class를 만드는 이유
 - 인터프리트 언어이며 쓰레드를 제공하고 동적인 언어이다.
 
 
+##String
+
+String은 final로 선언되어 있기 때문에 확장이 불가하다 즉 자식클래스를 양산 할 수 없다.
+
+String은 Serializable, Comparable, CharSequenc라는 인터페이스를 구현한 클래스이다.
+
+
+###String의 생성자
+
+매우 많지만 아래 정도만 알아두면 됨 대부분 따옴표로 묶어서 생성하기 때문에
+
+- String(byte[] bytes)
+- String(byte[] bytes, String charsetName)
+
+
+###String byte로 변환하기
+
+getbyte메소드를 사용한다
+
+
+### 객체의 null 체크는 습관화해야한다.
+
+
+###문자열의 길이를 확인
+
+- length() : 문자열 길이 리턴 (int)
+- isEmpty() : 문자열이 비어 있는지 확인 (boolean 비어있으면 true)
+
+
+###문자열이 같은지 비교
+
+- equals() : 리턴(boolean)
+- compareTo() : 보통 정렬을 할때 사용 앞에있을경우 양수 뒤에있을경우 음수 리턴(int)
+- content() : 
+
+
+**Constant Pool*
+
+String의 모든 객체는 상수풀에서 관리하게 되는데 "" 처럼 리터럴로 생성한 객체는 재사용을 하게되어 ==비교 연산으로도 true가 나오게 된다(주소값이 같다는 의미)
+
+###특정 조건의 문자열이 존재하는지 확인
+
+- startWith() : 매개변수로 넘겨준 값으로 시작하는지를 확인
+- endWith() : 매개변수로 넘겨준 값으로 끝나는지 확인
+- contains() : 매개변수로 넘겨준 값을 포함하는지 문자열에 존재하는지 확인
+- matches() : contains()와 비슷하지만 매개변수로 넘어오는 값이 정규 표현식인지 확인
+- regionMatches(대소문자구분,비교대상문자열 시작위치,확인하고자하는 문자열,객체의 시작위치,비교 갯수) : 문자열 중에서 특정 영역이 매개 변수로 넘어온 문자열과 동일한지를 확인하는데 사용
+
+###위치를 찾아내는 방법
+
+-indexOf() : 해당 객체의 특정 문자열이나 char가 있는 위치를 알 수 있다. // **가장 많이 사용**
+-lastIndexOf() : 뒤에서 부터 검색
+
+###String의 값의 일부를 추출하는 메소드
+
+- charAt(int index) : 특정 위치의 char값을 리턴한다.
+
+
+char -> String : copyValueOf()
+String -> char[] : toCharArray()
+
+###문자열의 일부 값을 잘라내는 메소드
+
+- subString(int begin, int end) : 잘라냄
+
+
+###문자열을 여러 String배열로 잘라냄
+
+- split(" ") : 공백을 기준으로 문자열을 잘라서 배열에 저장함
+
+###String의 값을 바꿈
+
+- trim() : 문자열의 앞과 뒤에있는 공백을 지움
+
+- replace() : 내용을 바꿔버림 (replaceAll(), replaceFirst())
+
+###대소문자
+- toLowerCase toUpperCase
+
+###기본자료형을 문자열로 변환
+- valueOf(기본자료형)
+
+
+###String의 단점을 보완하기 위한 객체 StringBuffer, StringBuilder
+- append() 를 사용하여 값을 붙인다.
+
+
+
+
+
 
 
 
