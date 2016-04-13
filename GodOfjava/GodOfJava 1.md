@@ -114,7 +114,7 @@ for(타입이름 임시변수명 : 반복대상객체){
   
 
 ##DTO
-자바의 패턴 중 DTO 라는 것이 있다 Data Transfer Object로 데이터ㅏ 포함된 객체를 한 시스템에서 다른 시스템으로 전달하는 작업을 처리하는 객체를 말한다.  VO (Value Object)와 거의 동일한 개념으로 사용한다
+자바의 패턴 중 DTO 라는 것이 있다 Data Transfer Object로 데이터가 포함된 객체를 한 시스템에서 다른 시스템으로 전달하는 작업을 처리하는 객체를 말한다.  VO (Value Object)와 거의 동일한 개념으로 사용한다
 
 ##Overloading
 
@@ -502,6 +502,27 @@ String -> char[] : toCharArray()
 ###String의 단점을 보완하기 위한 객체 StringBuffer, StringBuilder
 - append() 를 사용하여 값을 붙인다.
 
+
+##제네릭
+
+타입 형 변환에서 발생할 수 있는 문제점을 사전에 없애기 위해 만들어짐 jdk5버젼 이후
+
+	public class GenericClass<T> {
+	}
+
+
+
+###wildcard
+	public void Wildcard(WildCard<?> c){
+	Object value = c.get();
+	}
+
+와일드카든 타입에 ?를 사용하여 어떤 타입이 제네릭 타입으로 되더라도 상관없는 것을 말한다
+어떤 타입이 올지 모르기 때문에 Object로 처리해야한다.
+
+	<? extends Class>
+
+의 형식으로 타입의 범위를 지정할 수 있다.
 
 
 
