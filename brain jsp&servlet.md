@@ -96,3 +96,113 @@
 		- 새로고침 버튼을 눌었을 때 일어나는 같은 동작의 중복을 막기 위해 효과적으로 사용된다
 	
 	
+	
+#04 쿠키와 세션
+
+- 웹컴포넌트는 jsp페이지와 서블릿 클래스를 통칭
+
+- 웹 컴포넌트가 데이터를 주고받고록 하기 위해서 쿠키와 세션이 필요하다
+
+- 둘의 가장 큰 차이는 저장장소 , 보안의 문제로 세션의 사용을 선호하지만 둘다 적절하게 사용함
+
+##쿠키
+
+데이터를 브라우저에 저장!!
+
+Cookie cookie = new Cookie(이름, 값)
+response.addcookie(cookie);
+
+-  쿠기문은 html코드보다 위에 오는것이 바람직하다
+
+		
+		데이터 읽기
+		Cookie[] cookie = request.getCookie;
+		
+		삭제
+		cookie.setMaxAge(int);   int값이 0 이면 즉시삭제 -1이면 브라우저 종료시 삭제
+		
+		특정경로 전송
+		
+		cookie.setPath()
+		cookie.setDomain() 
+
+
+
+##세션
+
+데이터를 웹 서버에 저장!!
+
+- 서블릿에서오 jsp에서의 사용법이 다름
+
+서블릿
+
+		세션 시작
+		HttpSession session = request.getSession();
+		session.setAttribute(이름,값);
+		
+		값 가져오기 
+		*  object 타입으로 리턴되기 때문에 캐스트가 필요
+ 		String string = (String) session.getAttribute(이름);
+ 		
+ 		삭제
+ 		session.removeAttribute(이름)
+ 		
+ 		세션종료
+ 		session.invalidate();
+ 		
+ 		* 강제로 세션종료를 하지않아도 일정시간 후에 종료 하지만 메모리가 낭비됨
+ 		
+
+
+jsp
+
+		getSession이 자동으로 추가되어 바로 session객체를 사용가능
+		
+		강제로 세션을 사용하지 않는 방법
+		<%@page session="false"%>
+		
+		나머지는 서블릿과 일치
+		
+
+
+## url 재작성 메커니즘
+
+세션 기술에서도 세션아이디를 쿠키형태로 전송하는데  그 쿠키의 이름은 JSESSIONID 이다.
+
+하지만 쿠키를 사용할 수 없는 웹 환경에서는 url 재작성 매커니즘을 사용한다.
+
+이는 url 뒤에 세션아이디를 붙여서 보내는 방식으로
+
+
+response.encodeURL("url.jsp") 의 형태로 사용한다
+
+
+
+##05 익셉션 처리
+
+- jsp
+
+<%@page --- ----- --- --   inErrorPage="true"%>  exception내장 변수를 활성화 시키는 코드이다
+
+<% response.setStatus(200) %>
+ http 상태코드를 고정하여 일정한 에러발생결과를 얻을 수 있다
+ 
+ 에러메세지는 exception.getMessage()를 통하여 자세한 에러 메세지를 얻을수 있다
+ 
+ 
+ 
+ 수행페이지에서는 지시자에 errorPage="--.jsp"를 작성함으로써 에러발생시 해당페이지로 이동한다
+ 
+ 
+- 서블릿
+
+서블릿의 경우 web.xml에
+
+<error-page>
+	<exception-type>404 or  java.lang.NullPointException </exception-type>
+	<location>---.jsp</location>
+</error-page>		
+		
+
+
+
